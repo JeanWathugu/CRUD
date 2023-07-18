@@ -22,7 +22,22 @@ def insert(request):
 
     return render(request, 'index.html')
 
+
 def people(request):
     d = details.objects.all()
-    return render(request, 'people.html', { "data":d})
-#or you could say after d , context= {'d' : d}...this gives people acccess to the data
+    return render(request, 'people.html', {"data": d})
+
+
+# or you could say after d , context= {'d' : d}...this gives people acccess to the data
+
+def delete(request, id):
+    dd = people.objects.get(id=id)
+    dd.delete()
+
+    return HttpResponse("Delete successful")
+
+
+def update(request, id):
+    l = people.objects.get(id=id)
+
+    return render(request, "update.html", {"l": l})
